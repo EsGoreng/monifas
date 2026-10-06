@@ -8,8 +8,7 @@
                 ['Pantau perbaikan', 'Status laporan diperbarui sampai perbaikan selesai.'],
             ] as $i => [$title, $desc])
                 <li>
-                    <span class="text-sm font-medium text-primary">{{ $i + 1 }}</span>
-                    <h3 class="mt-1 font-medium">{{ $title }}</h3>
+                    <h3 class="font-medium">{{ $i + 1 }}. {{ $title }}</h3>
                     <p class="mt-1 text-sm text-muted-foreground">{{ $desc }}</p>
                 </li>
             @endforeach
