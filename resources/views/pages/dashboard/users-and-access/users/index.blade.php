@@ -1,7 +1,7 @@
-<x-layouts.dashboard title="Analytics Dashboard">
+<x-layouts.dashboard title="Users">
     <x-shared.coming-soon
-        title="Analytics Dashboard"
-        module="Monitoring & Analytic"
+        title="Users"
+        module="Users & Access"
         description="This feature is currently under active development. Stay tuned for upcoming updates."
     />
 </x-layouts.dashboard>

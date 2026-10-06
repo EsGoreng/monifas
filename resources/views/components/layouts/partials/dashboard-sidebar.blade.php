@@ -274,9 +274,6 @@ $modules = [
                                 class="group flex items-center justify-between rounded-md px-2 py-1 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring {{ $sub['is_active'] ? 'bg-secondary text-foreground font-semibold shadow-2xs' : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground' }}"
                             >
                                 <span>{{ $sub['title'] }}</span>
-                                @if ($sub['is_active'])
-                                    <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                                @endif
                             </a>
                         @endforeach
                     </div>

@@ -1,6 +1,6 @@
-<x-layouts.dashboard title="Analytics Dashboard">
+<x-layouts.dashboard title="Maintenance Reports">
     <x-shared.coming-soon
-        title="Analytics Dashboard"
+        title="Maintenance Reports"
         module="Monitoring & Analytic"
         description="This feature is currently under active development. Stay tuned for upcoming updates."
     />
