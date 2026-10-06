@@ -20,7 +20,7 @@ Alur request: `Router → Controller → Service → View (Blade)`, validasi lew
 
 ## Aturan Wajib
 
-- Semua file PHP di `app/`, `routes/`, `tests/` wajib `declare(strict_types=1);`.
+- Proyek ini **tidak memakai** `declare(strict_types=1);`. Jangan menambahkannya ke file PHP.
 - Controller tipis; logika bisnis di `app/Services/`; validasi di `app/Http/Requests/`.
 - Model diletakkan **datar** di `app/Models/` (jangan buat `app/Models/<Namespace>/`).
 - Gunakan Form Request, Validation, dan Carbon bawaan Laravel; jangan tambah package validasi/tanggal pihak ketiga.
@@ -111,7 +111,7 @@ npm run build                     # hasil di public/build/
 php artisan config:cache && php artisan route:cache
 ```
 
-Konfigurasi tooling: `phpstan.neon`, `pint.json` (preset `laravel`, `declare_strict_types`), `.editorconfig` (PHP/Blade 4 spasi; JS/TS/CSS/JSON 2 spasi), `vite.config.js` (`input` = `app.css` + `app.js`, `refresh: true`).
+Konfigurasi tooling: `phpstan.neon`, `pint.json` (preset `laravel`, `declare_strict_types` dinonaktifkan), `.editorconfig` (PHP/Blade 4 spasi; JS/TS/CSS/JSON 2 spasi), `vite.config.js` (`input` = `app.css` + `app.js`, `refresh: true`).
 
 ---
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 // Feature: monifas-base-project, Property 10: CSS design tokens defined in app.css
 // Validates: Requirements 4.2
 it('setiap design token CSS variable terdefinisi di app.css', function (string $token) {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use App\Console\Commands\ScaffoldManifest;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;

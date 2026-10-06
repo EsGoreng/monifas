@@ -1,58 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MONIFAS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Platform Pelaporan & Monitoring Fasilitas Infrastruktur**
 
-## About Laravel
+MONIFAS adalah aplikasi web untuk melaporkan, memantau, dan menangani kerusakan fasilitas infrastruktur (gedung, ruangan, dan aset di dalamnya). Pengguna dapat membuat laporan kerusakan beserta bukti, lalu petugas menindaklanjuti lewat penugasan, penjadwalan, dan pencatatan perbaikan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini adalah **Laravel server-rendered monolith**: tidak ada API layer, SPA, atau WebSocket.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Aspek | Teknologi |
+|---|---|
+| Framework / Bahasa | Laravel 13, PHP 8.3+ |
+| View | Blade + Blade Components internal (`<x-ui.*>`) |
+| Interaktivitas | Alpine.js 3 |
+| Styling | Tailwind CSS 4 via Vite |
+| Grafik / Ikon | Chart.js 4 / Blade Lucide Icons |
+| Database (default) | SQLite |
+| Kualitas kode | Laravel Pint, Larastan (PHPStan) |
+| Testing | Pest |
 
-## Learning Laravel
+## Modul Aplikasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Modul | Submodul | Kegunaan |
+|---|---|---|
+| `users-and-access` | users, roles, user-addresses | Akun pengguna, hak akses berbasis peran, alamat pengguna |
+| `facility` | buildings, rooms, facilities | Inventaris gedung, ruangan, dan fasilitas |
+| `location-and-category` | locations, facility-categories, damage-categories | Master lokasi dan kategori fasilitas/kerusakan |
+| `reporting` | reports, report-evidence, report-priorities | Laporan kerusakan, bukti, dan prioritas |
+| `maintenance` | officers, assignments, schedules | Petugas, penugasan, dan jadwal perawatan |
+| `repair` | repairs, materials, costs | Catatan perbaikan, material, dan biaya |
+| `supporting` | announcements, feedback, campaigns | Pengumuman, umpan balik, dan kampanye |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Alur request: `Router → Controller → Service → View (Blade)`, dengan validasi lewat Form Request.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Prasyarat
 
-## Agentic Development
+Pastikan sudah terpasang:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- PHP **8.3** atau lebih baru (ekstensi umum Laravel, termasuk `pdo_sqlite`, `mbstring`, `openssl`, `fileinfo`)
+- [Composer](https://getcomposer.org) 2
+- [Node.js](https://nodejs.org) 20+ beserta npm
+- Git
 
-```bash
-composer require laravel/boost --dev
+Cek dengan:
 
-php artisan boost:install
+```sh
+php -v
+composer -V
+node -v
+npm -v
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Langkah Startup
 
-## Contributing
+### 1. Clone repository
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sh
+git clone <url-repository>
+cd monifas-laravel
+```
 
-## Code of Conduct
+### 2. Setup otomatis (disarankan)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sh
+composer run setup
+```
 
-## Security Vulnerabilities
+Perintah ini menjalankan: `composer install`, menyalin `.env.example` ke `.env` (jika belum ada), `php artisan key:generate`, `php artisan migrate --force`, `npm install`, dan `npm run build`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. Atau setup manual
 
-## License
+```sh
+composer install
+cp .env.example .env            # Windows PowerShell: Copy-Item .env.example .env
+php artisan key:generate
+php artisan migrate
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Jika memakai SQLite dan file database belum ada, `php artisan migrate` akan menawarkan untuk membuatnya. Anda juga bisa membuatnya manual:
+
+```sh
+touch database/database.sqlite  # Windows PowerShell: New-Item database\database.sqlite
+```
+
+### 4. Jalankan aplikasi
+
+```sh
+composer run dev
+```
+
+Perintah ini menjalankan server Laravel dan Vite (hot reload) sekaligus. Buka **http://localhost:8000**.
+
+Alternatif, jalankan terpisah di dua terminal:
+
+```sh
+php artisan serve
+npm run dev
+```
+
+> Halaman akan tampil tanpa styling jika Vite belum berjalan. Jalankan `npm run dev` (atau `npm run build` sekali) agar CSS dan JS termuat.
+
+## Konfigurasi Database
+
+Default memakai SQLite. Untuk MySQL/PostgreSQL, ubah di `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=monifas
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Lalu jalankan `php artisan migrate`.
+
+## Perintah Berguna
+
+| Perintah | Fungsi |
+|---|---|
+| `composer run dev` | Server Laravel + Vite |
+| `php artisan test` | Menjalankan test (Pest) |
+| `./vendor/bin/pint` | Merapikan code style |
+| `./vendor/bin/pint --test` | Cek code style tanpa mengubah file |
+| `./vendor/bin/phpstan analyse` | Analisis statis (Larastan) |
+| `npm run build` | Build aset produksi ke `public/build/` |
+| `php artisan migrate:fresh` | Reset database dan jalankan ulang migrasi |
+| `php artisan optimize:clear` | Membersihkan cache config, route, dan view |
+
+## Troubleshooting
+
+| Masalah | Solusi |
+|---|---|
+| `No application encryption key has been specified` | Jalankan `php artisan key:generate` |
+| Halaman tanpa styling / error Vite manifest | Jalankan `npm run dev` atau `npm run build` |
+| `could not find driver` | Aktifkan ekstensi `pdo_sqlite` di `php.ini` |
+| Perubahan `.env` tidak terbaca | Jalankan `php artisan config:clear` |
+| Port 8000 sudah dipakai | Jalankan `php artisan serve --port=8001` dan sesuaikan `APP_URL` |
+
+## Panduan Pengembangan
+
+Proyek ini dikerjakan per modul oleh beberapa anggota tim. Sebelum mulai, baca:
+
+- [SOP-MODUL.md](SOP-MODUL.md): SOP pengerjaan modul (struktur file, komponen, styling, Git, checklist PR)
+- [AGENTS.md](AGENTS.md): aturan teknis dan struktur proyek
+- `.kiro/specs/monifas-base-project/`: requirements, design, dan tasks
+
+## Lisensi
+
+Proyek ini dibangun di atas [Laravel](https://laravel.com) yang berlisensi [MIT](https://opensource.org/licenses/MIT).

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 // Feature: monifas-base-project, Property 6: Required PHP dependencies present in composer.json
 // Validates: Requirements 1.7, 3.3, 3.4, 3.5
 it('setiap package PHP wajib terdaftar di require atau require-dev pada composer.json', function (string $package) {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use App\Console\Commands\ScaffoldManifest;
 
 // Feature: monifas-base-project, Property 1: ScaffoldManifest paths are well-formed
