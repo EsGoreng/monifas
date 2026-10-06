@@ -7,6 +7,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        <x-layouts.partials.landing-navbar/>
         {{ $slot }}
+        <x-layouts.partials.landing-footer/>
     </body>
 </html>
