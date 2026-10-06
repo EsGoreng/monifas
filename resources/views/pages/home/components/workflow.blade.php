@@ -1,18 +1,18 @@
-<section id="alur" class="mx-auto max-w-6xl px-4 pb-20 text-center">
-    <x-ui.eyebrow>Solusi &amp; Standar</x-ui.eyebrow>
-    <h2 class="mt-1 text-2xl font-bold">Alur Pelaporan Cepat &amp; Transparan</h2>
-    <p class="mt-2 text-xs text-muted-foreground">Tiga langkah sederhana dari laporan hingga perbaikan.</p>
-    <div class="mt-8 grid gap-4 text-left md:grid-cols-3">
-        @foreach ([
-            ['camera', 'Foto &amp; Geotag', 'Ambil foto kerusakan, lokasi terdeteksi otomatis.'],
-            ['zap', 'Disposisi Cepat', 'Laporan diteruskan ke petugas yang berwenang.'],
-            ['list-checks', 'Pantau &amp; Tuntas', 'Lihat progres perbaikan hingga selesai.'],
-        ] as [$icon, $title, $desc])
-            <x-ui.card class="p-6">
-                <x-dynamic-component :component="'lucide-'.$icon" class="h-5 w-5 text-primary" />
-                <h3 class="mt-4 font-semibold">{!! $title !!}</h3>
-                <p class="mt-1 text-xs text-muted-foreground">{{ $desc }}</p>
-            </x-ui.card>
-        @endforeach
+<section id="alur" class="border-t border-border bg-secondary">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl font-semibold">Cara kerja</h2>
+        <ol class="mt-8 grid gap-8 md:grid-cols-3">
+            @foreach ([
+                ['Kirim laporan', 'Isi lokasi dan deskripsi kerusakan, lalu lampirkan foto sebagai bukti.'],
+                ['Ditugaskan ke petugas', 'Laporan ditinjau, diberi prioritas, dan diteruskan ke petugas terkait.'],
+                ['Pantau perbaikan', 'Status laporan diperbarui sampai perbaikan selesai.'],
+            ] as $i => [$title, $desc])
+                <li>
+                    <span class="text-sm font-medium text-primary">{{ $i + 1 }}</span>
+                    <h3 class="mt-1 font-medium">{{ $title }}</h3>
+                    <p class="mt-1 text-sm text-muted-foreground">{{ $desc }}</p>
+                </li>
+            @endforeach
+        </ol>
     </div>
 </section>

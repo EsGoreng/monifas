@@ -33,7 +33,7 @@ Alur request: `Router → Controller → Service → View (Blade)`, validasi lew
 
 ## Struktur Modul
 
-Tujuh modul, masing-masing dengan submodul. Kebab-case dipakai di `resources/views/dashboard/`, PascalCase di `app/` dan `tests/`.
+Delapan modul, masing-masing dengan submodul. Kebab-case dipakai di `resources/views/dashboard/`, PascalCase di `app/` dan `tests/`.
 
 | Modul (kebab) | Namespace | Submodul | Kegunaan modul |
 |---|---|---|---|
@@ -43,6 +43,7 @@ Tujuh modul, masing-masing dengan submodul. Kebab-case dipakai di `resources/vie
 | `reporting` | `Reporting` | `reports`, `report-evidence`, `report-priorities` | Pelaporan kerusakan oleh pengguna, bukti (foto/dokumen), dan penentuan prioritas |
 | `maintenance` | `Maintenance` | `officers`, `assignments`, `schedules` | Petugas, penugasan laporan ke petugas, dan penjadwalan perawatan |
 | `repair` | `Repair` | `repairs`, `materials`, `costs` | Pencatatan perbaikan, material yang dipakai, dan biaya |
+| `monitoring-and-analytic` | `MonitoringAndAnalytic` | `dashboard`, `maintenance-report`, `sla-monitoring` | Monitoring analitik performa fasilitas, laporan perawatan, dan kepatuhan SLA |
 | `supporting` | `Supporting` | `announcements`, `feedback`, `campaigns` | Fitur pendukung: pengumuman, umpan balik, dan kampanye |
 
 ### Kegunaan Submodul
@@ -67,6 +68,9 @@ Tujuh modul, masing-masing dengan submodul. Kebab-case dipakai di `resources/vie
 | `repairs` | Catatan pekerjaan perbaikan |
 | `materials` | Material/suku cadang yang digunakan |
 | `costs` | Biaya perbaikan |
+| `dashboard` | Dashboard analitik utama dan tren kerusakan fasilitas |
+| `maintenance-report` | Rekapitulasi laporan pemeliharaan dan statistik perbaikan aset |
+| `sla-monitoring` | Pemantauan waktu tanggap dan kepatuhan Service Level Agreement (SLA) |
 | `announcements` | Pengumuman ke pengguna |
 | `feedback` | Masukan/penilaian pengguna |
 | `campaigns` | Kampanye/sosialisasi |

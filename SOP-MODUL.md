@@ -12,7 +12,8 @@ Dokumen ini wajib dibaca setiap anggota sebelum mengerjakan modul. Aturan teknis
 | 4 | `reporting` | `Reporting` | `reports`, `report-evidence`, `report-priorities` |
 | 5 | `maintenance` | `Maintenance` | `officers`, `assignments`, `schedules` |
 | 6 | `repair` | `Repair` | `repairs`, `materials`, `costs` |
-| 7 | `supporting` | `Supporting` | `announcements`, `feedback`, `campaigns` |
+| 7 | `monitoring-and-analytic` | `MonitoringAndAnalytic` | `dashboard`, `maintenance-report`, `sla-monitoring` |
+| 8 | `supporting` | `Supporting` | `announcements`, `feedback`, `campaigns` |
 
 Penanggung jawab: isi sendiri di tabel ini saat pembagian tugas.
 
