@@ -1,104 +1,202 @@
 @php
-$navGroups = [
+$modules = [
     [
-        'label' => 'Ringkasan',
-        'items' => [
+        'name' => 'Monitoring',
+        'slug' => 'monitoring-and-analytic',
+        'icon' => 'lucide-chart-column',
+        'submodules' => [
             [
-                'title' => 'Overview',
-                'url' => route('dashboard'),
-                'icon' => 'lucide-layout-dashboard',
-                'active' => request()->routeIs('dashboard') && !request()->is('dashboard/*'),
-            ],
-        ],
-    ],
-    [
-        'label' => 'Inventaris & Aset',
-        'items' => [
-            [
-                'title' => 'Fasilitas & Aset',
-                'url' => url('/dashboard/facility/facilities'),
-                'icon' => 'lucide-box',
-                'active' => request()->is('dashboard/facility/facilities*'),
-            ],
-            [
-                'title' => 'Gedung & Ruangan',
-                'url' => url('/dashboard/facility/buildings'),
-                'icon' => 'lucide-building-2',
-                'active' => request()->is('dashboard/facility/buildings*') || request()->is('dashboard/facility/rooms*'),
-            ],
-            [
-                'title' => 'Lokasi & Kategori',
-                'url' => url('/dashboard/location-and-category/locations'),
-                'icon' => 'lucide-map-pin',
-                'active' => request()->is('dashboard/location*'),
-            ],
-        ],
-    ],
-    [
-        'label' => 'Pelaporan',
-        'items' => [
-            [
-                'title' => 'Laporan Kerusakan',
-                'url' => url('/dashboard/reporting/reports'),
-                'icon' => 'lucide-file-text',
-                'active' => request()->is('dashboard/reporting*'),
-            ],
-        ],
-    ],
-    [
-        'label' => 'Pemeliharaan',
-        'items' => [
-            [
-                'title' => 'Penugasan Petugas',
-                'url' => url('/dashboard/maintenance/assignments'),
-                'icon' => 'lucide-clipboard-check',
-                'active' => request()->is('dashboard/maintenance*'),
-            ],
-            [
-                'title' => 'Perbaikan & Biaya',
-                'url' => url('/dashboard/repair/repairs'),
-                'icon' => 'lucide-wrench',
-                'active' => request()->is('dashboard/repair*'),
-            ],
-        ],
-    ],
-    [
-        'label' => 'Monitoring & Analitik',
-        'items' => [
-            [
-                'title' => 'Dashboard Analitik',
+                'title' => 'Dashboard',
+                'slug' => 'dashboard',
                 'url' => url('/dashboard/monitoring-and-analytic/dashboard'),
-                'icon' => 'lucide-chart-column',
-                'active' => request()->is('dashboard/monitoring-and-analytic/dashboard*'),
+                'is_active' => request()->is('dashboard') || request()->is('dashboard/monitoring-and-analytic/dashboard*'),
             ],
             [
-                'title' => 'Laporan Perawatan',
+                'title' => 'Maintenance Reports',
+                'slug' => 'maintenance-report',
                 'url' => url('/dashboard/monitoring-and-analytic/maintenance-report'),
-                'icon' => 'lucide-file-spreadsheet',
-                'active' => request()->is('dashboard/monitoring-and-analytic/maintenance-report*'),
+                'is_active' => request()->is('dashboard/monitoring-and-analytic/maintenance-report*'),
             ],
             [
-                'title' => 'Monitoring SLA',
+                'title' => 'SLA Monitoring',
+                'slug' => 'sla-monitoring',
                 'url' => url('/dashboard/monitoring-and-analytic/sla-monitoring'),
-                'icon' => 'lucide-activity',
-                'active' => request()->is('dashboard/monitoring-and-analytic/sla-monitoring*'),
+                'is_active' => request()->is('dashboard/monitoring-and-analytic/sla-monitoring*'),
             ],
         ],
     ],
     [
-        'label' => 'Sistem & Akses',
-        'items' => [
+        'name' => 'Facility',
+        'slug' => 'facility',
+        'icon' => 'lucide-building-2',
+        'submodules' => [
             [
-                'title' => 'Pengguna & Akses',
-                'url' => url('/dashboard/users-and-access/users'),
-                'icon' => 'lucide-users',
-                'active' => request()->is('dashboard/users*'),
+                'title' => 'Buildings',
+                'slug' => 'buildings',
+                'url' => url('/dashboard/facility/buildings'),
+                'is_active' => request()->is('dashboard/facility/buildings*'),
             ],
             [
-                'title' => 'Pengumuman',
+                'title' => 'Rooms',
+                'slug' => 'rooms',
+                'url' => url('/dashboard/facility/rooms'),
+                'is_active' => request()->is('dashboard/facility/rooms*'),
+            ],
+            [
+                'title' => 'Facilities',
+                'slug' => 'facilities',
+                'url' => url('/dashboard/facility/facilities'),
+                'is_active' => request()->is('dashboard/facility/facilities*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Location & Category',
+        'slug' => 'location-and-category',
+        'icon' => 'lucide-map-pin',
+        'submodules' => [
+            [
+                'title' => 'Locations',
+                'slug' => 'locations',
+                'url' => url('/dashboard/location-and-category/locations'),
+                'is_active' => request()->is('dashboard/location-and-category/locations*'),
+            ],
+            [
+                'title' => 'Facility Categories',
+                'slug' => 'facility-categories',
+                'url' => url('/dashboard/location-and-category/facility-categories'),
+                'is_active' => request()->is('dashboard/location-and-category/facility-categories*'),
+            ],
+            [
+                'title' => 'Damage Categories',
+                'slug' => 'damage-categories',
+                'url' => url('/dashboard/location-and-category/damage-categories'),
+                'is_active' => request()->is('dashboard/location-and-category/damage-categories*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Reporting',
+        'slug' => 'reporting',
+        'icon' => 'lucide-file-text',
+        'submodules' => [
+            [
+                'title' => 'Damage Reports',
+                'slug' => 'reports',
+                'url' => url('/dashboard/reporting/reports'),
+                'is_active' => request()->is('dashboard/reporting/reports*'),
+            ],
+            [
+                'title' => 'Report Evidence',
+                'slug' => 'report-evidence',
+                'url' => url('/dashboard/reporting/report-evidence'),
+                'is_active' => request()->is('dashboard/reporting/report-evidence*'),
+            ],
+            [
+                'title' => 'Report Priorities',
+                'slug' => 'report-priorities',
+                'url' => url('/dashboard/reporting/report-priorities'),
+                'is_active' => request()->is('dashboard/reporting/report-priorities*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Maintenance',
+        'slug' => 'maintenance',
+        'icon' => 'lucide-hard-hat',
+        'submodules' => [
+            [
+                'title' => 'Officers',
+                'slug' => 'officers',
+                'url' => url('/dashboard/maintenance/officers'),
+                'is_active' => request()->is('dashboard/maintenance/officers*'),
+            ],
+            [
+                'title' => 'Assignments',
+                'slug' => 'assignments',
+                'url' => url('/dashboard/maintenance/assignments'),
+                'is_active' => request()->is('dashboard/maintenance/assignments*'),
+            ],
+            [
+                'title' => 'Schedules',
+                'slug' => 'schedules',
+                'url' => url('/dashboard/maintenance/schedules'),
+                'is_active' => request()->is('dashboard/maintenance/schedules*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Repair',
+        'slug' => 'repair',
+        'icon' => 'lucide-wrench',
+        'submodules' => [
+            [
+                'title' => 'Repairs',
+                'slug' => 'repairs',
+                'url' => url('/dashboard/repair/repairs'),
+                'is_active' => request()->is('dashboard/repair/repairs*'),
+            ],
+            [
+                'title' => 'Materials',
+                'slug' => 'materials',
+                'url' => url('/dashboard/repair/materials'),
+                'is_active' => request()->is('dashboard/repair/materials*'),
+            ],
+            [
+                'title' => 'Costs',
+                'slug' => 'costs',
+                'url' => url('/dashboard/repair/costs'),
+                'is_active' => request()->is('dashboard/repair/costs*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Supporting',
+        'slug' => 'supporting',
+        'icon' => 'lucide-life-buoy',
+        'submodules' => [
+            [
+                'title' => 'Announcements',
+                'slug' => 'announcements',
                 'url' => url('/dashboard/supporting/announcements'),
-                'icon' => 'lucide-megaphone',
-                'active' => request()->is('dashboard/supporting*'),
+                'is_active' => request()->is('dashboard/supporting/announcements*'),
+            ],
+            [
+                'title' => 'Feedback',
+                'slug' => 'feedback',
+                'url' => url('/dashboard/supporting/feedback'),
+                'is_active' => request()->is('dashboard/supporting/feedback*'),
+            ],
+            [
+                'title' => 'Campaigns',
+                'slug' => 'campaigns',
+                'url' => url('/dashboard/supporting/campaigns'),
+                'is_active' => request()->is('dashboard/supporting/campaigns*'),
+            ],
+        ],
+    ],
+    [
+        'name' => 'Users & Access',
+        'slug' => 'users-and-access',
+        'icon' => 'lucide-users',
+        'submodules' => [
+            [
+                'title' => 'Users',
+                'slug' => 'users',
+                'url' => url('/dashboard/users-and-access/users'),
+                'is_active' => request()->is('dashboard/users-and-access/users*'),
+            ],
+            [
+                'title' => 'Roles',
+                'slug' => 'roles',
+                'url' => url('/dashboard/users-and-access/roles'),
+                'is_active' => request()->is('dashboard/users-and-access/roles*'),
+            ],
+            [
+                'title' => 'User Addresses',
+                'slug' => 'user-addresses',
+                'url' => url('/dashboard/users-and-access/user-addresses'),
+                'is_active' => request()->is('dashboard/users-and-access/user-addresses*'),
             ],
         ],
     ],
@@ -117,7 +215,7 @@ $navGroups = [
             </span>
             <div class="flex flex-col">
                 <span class="text-sm font-semibold tracking-tight text-foreground leading-none">MONIFAS</span>
-                <span class="text-[11px] text-muted-foreground mt-0.5">Monitoring Fasilitas</span>
+                <span class="text-[11px] text-muted-foreground mt-0.5">Facility Monitoring</span>
             </div>
         </a>
 
@@ -126,36 +224,65 @@ $navGroups = [
             type="button"
             class="rounded-md p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             @click="sidebarOpen = false"
-            aria-label="Tutup sidebar"
+            aria-label="Close sidebar"
         >
             <x-lucide-x class="h-4 w-4" />
         </button>
     </div>
 
-    <!-- Navigation List -->
-    <nav class="flex-1 overflow-y-auto px-3 py-3 space-y-5" aria-label="Navigasi Utama">
-        @foreach ($navGroups as $group)
-            <div class="space-y-1">
-                <div class="px-2.5 py-1 text-xs font-medium text-muted-foreground/70 uppercase tracking-wider">
-                    {{ $group['label'] }}
-                </div>
+    <!-- Navigation List (8 Modules) -->
+    <nav class="flex-1 overflow-y-auto px-3 py-3 space-y-1" aria-label="Dashboard Navigation">
 
-                <div class="space-y-0.5">
-                    @foreach ($group['items'] as $item)
-                        <a
-                            href="{{ $item['url'] }}"
-                            class="group flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring {{ $item['active'] ? 'bg-secondary text-foreground font-semibold shadow-2xs' : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground' }}"
-                        >
+        <div class="space-y-1 pt-1">
+            @foreach ($modules as $module)
+                @php
+                    $isModuleActive = ($module['slug'] === 'monitoring-and-analytic' && request()->is('dashboard'))
+                        || request()->is('dashboard/' . $module['slug'] . '*');
+                @endphp
+                <div
+                    x-data="{ open: {{ $isModuleActive ? 'true' : 'false' }} }"
+                    class="space-y-0.5"
+                >
+                    <!-- Module Accordion Trigger -->
+                    <button
+                        type="button"
+                        @click="open = !open"
+                        class="group flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring {{ $isModuleActive ? 'text-foreground font-semibold bg-muted/40' : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground' }}"
+                    >
+                        <div class="flex items-center gap-2.5">
                             <x-dynamic-component
-                                :component="$item['icon']"
-                                class="h-4 w-4 shrink-0 transition-colors {{ $item['active'] ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground' }}"
+                                :component="$module['icon']"
+                                class="h-4 w-4 shrink-0 transition-colors {{ $isModuleActive ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground' }}"
                             />
-                            <span>{{ $item['title'] }}</span>
-                        </a>
-                    @endforeach
+                            <span>{{ $module['name'] }}</span>
+                        </div>
+                        <x-lucide-chevron-right
+                            class="h-3.5 w-3.5 text-muted-foreground/70 transition-transform duration-200"
+                            ::class="open ? 'rotate-90 text-foreground' : ''"
+                        />
+                    </button>
+
+                    <!-- Submodules List -->
+                    <div
+                        x-show="open"
+                        x-cloak
+                        class="ml-3.5 space-y-0.5 border-l border-border/70 pl-2.5 py-0.5"
+                    >
+                        @foreach ($module['submodules'] as $sub)
+                            <a
+                                href="{{ $sub['url'] }}"
+                                class="group flex items-center justify-between rounded-md px-2 py-1 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring {{ $sub['is_active'] ? 'bg-secondary text-foreground font-semibold shadow-2xs' : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground' }}"
+                            >
+                                <span>{{ $sub['title'] }}</span>
+                                @if ($sub['is_active'])
+                                    <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                @endif
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </nav>
 
     <!-- Sidebar Footer -->
@@ -165,7 +292,7 @@ $navGroups = [
             class="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
             <x-lucide-arrow-left class="h-3.5 w-3.5" />
-            <span>Kembali ke Beranda</span>
+            <span>Back to Home</span>
         </a>
     </div>
 </aside>
